@@ -9,11 +9,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet var setUpJokeLabel: UILabel!
+    @IBOutlet var punchLineJokeLabel: UILabel!
+    
+    private let jokeManager = JokeManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        updateJoke()
     }
-
-
+    
+    @IBAction func nextJokeButtonPressed() {
+        updateJoke()
+    }
+    
+    private func updateJoke() {
+        jokeManager.fetchJoke { setUp, punchLine in
+            DispatchQueue.main.async {
+                self.setUpJokeLabel.text = setUp
+                self.punchLineJokeLabel.text = punchLine
+            }
+        }
+    }
 }
 
