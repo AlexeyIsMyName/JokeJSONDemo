@@ -15,7 +15,7 @@ struct Joke: Decodable {
 struct JokeManager {
     private let jokeURL = "https://joke.deno.dev/"
     
-    func fetchJoke(completion: @escaping (String?, String?) -> Void) {
+    func fetchJoke(completion: @escaping (Joke) -> Void) {
         
         if let url = URL(string: jokeURL) {
             let session = URLSession(configuration: .default)
@@ -27,7 +27,7 @@ struct JokeManager {
                 
                 if let safeData = data {
                     if let joke = parseJSON(safeData) {
-                        completion(joke.setup, joke.punchline)
+                        completion(joke)
                     }
                 }
             }

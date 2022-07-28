@@ -25,10 +25,10 @@ class ViewController: UIViewController {
     }
     
     private func updateJoke() {
-        jokeManager.fetchJoke { setUp, punchLine in
+        jokeManager.fetchJoke { joke in
             DispatchQueue.main.async {
-                self.setUpJokeLabel.text = setUp
-                self.punchLineJokeLabel.text = punchLine
+                self.setUpJokeLabel.text = joke.setup
+                self.punchLineJokeLabel.text = joke.punchline
             }
         }
     }
